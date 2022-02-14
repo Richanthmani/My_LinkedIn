@@ -16,20 +16,29 @@
     </div>
     <div class="form-group">
       <label for="username">Userame</label>
-      <input type="text" class="form-control" id="username"  name="username"  placeholder="Enter Username" [(ngModel)]=user.userName #username="ngModel" required>
-      <span  class ="text-danger" *ngIf="email.invalid && email.touched">*Username is a Required field</span><br>
+      <input type="text" class="form-control" id="username"  name="username"  placeholder="Enter Username" [(ngModel)]=user.userName  required #username="ngModel">
+      <span  class ="text-danger" *ngIf="username.invalid && username.touched">*Username is a Required field</span><br>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control"  name="password"   placeholder="Enter password" [(ngModel)]="user.password" #password="ngModel" required>
-      <span  class ="text-danger" *ngIf="password.invalid && password.touched">*Username is a Required field</span><br>
+      <input type="password" class="form-control"  name="password"   placeholder="Enter password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" [(ngModel)]="user.password"  required #password="ngModel"
+             [class.is-invalid]="password.invalid && password.touched"
+      >
+      <div *ngIf="password.errors && (password.invalid && password.touched)">
+        <small  class="text-danger" *ngIf="password.errors?.['required']">*Password is a required feild</small>
+        <small  class="text-danger" *ngIf="password.errors?.['pattern']">*Password must contain,>=8 characters,one or more [A-Z],one or more [a-z],one or more[0-9],one or more special characters</small>
+      </div>
+      <!--<span  class ="text-danger" *ngIf="password.invalid && password.touched">*Password is a Required field</span><br>-->
     </div>
     <div class="form-group">
       <label for="password"> Confirm Password</label>
-      <input type="password" class="form-control" id="password"  name="cpassword"  placeholder="Enter password" #cpassword="ngModel"  [(ngModel)]="user.password"  required>
-      <span  class ="text-danger" *ngIf="password.value !== cpassword.value">*confirm password should be same as password</span><br>
+      <input type="password" class="form-control" id="password"  name="cpassword"  placeholder="Enter password"   [(ngModel)]="user.cpassword"  required #cpassword="ngModel">
+      <span  class ="text-danger" *ngIf="cpassword.touched && (password.value !== cpassword.value)">*confirm password should be same as password</span><br>
     </div>
 
     <button type="submit" [disabled]="Registerform.form.invalid"class="btn btn-primary">Sign Up</button>
+
+
+    <span class="psw" (click)="gotologin()" style="float:right">Wanna login?<a>Login here</a></span>
   </form>
 </div>

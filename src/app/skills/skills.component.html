@@ -1,6 +1,86 @@
 
-<!--<div class="form-group">
-  <label for="skill">Add Skill</label>
-  <input type="text" class="form-control" id="skill"  name="skill"  placeholder="Enter Skill" [(ngModel)]=user.skill #username="ngModel" required>
-  <!--<span  class ="text-danger" *ngIf="email.invalid && email.touched">*Username is a Required field</span><br>
-</div> -->
+
+
+
+
+
+
+
+
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Add Skill
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Skill</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          (ngSubmit)="addskill()">
+                          <div class="form-group">
+                            <label for="skill">Add Skill</label>
+                            <input type="text" class="form-control" id="skill"  name="skill"  placeholder="Enter Skill" [(ngModel)]=skill.skill #skills="ngModel" required>
+                            <!--<span  class ="text-danger" *ngIf="email.invalid && email.touched">*Username is a Required field</span><br>--->
+                          </div>
+                         <!-- <button type="submit" class="btn btn-primary" (click)="getskills()">Add</button>-->
+
+
+                          <button type="submit" class="btn btn-primary">Add</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right">Close</button>
+
+                        </form>
+
+                        <div class="modal-footer">
+
+
+
+
+                        </div>
+
+
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th style="text-align: center"><h3>Skills</h3></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let index of skilllist">
+                    <td>
+                      {{index.skill}}
+                      <input type="button" value="Update"  class="btn btn-danger" (click)="updateskill(index.id)"  style="float : right"/>
+                      <input type="button" value="Delete"  class="btn btn-danger" (click)="deleteskill(index.id)"  style="float : right ; margin-right: 10px;"/>
+                    </td>
+                    <td style="text-align: right ">
+
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+     <!--  <div>
+         <table>
+           <thead>
+           <tr>
+             <th>Skills</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr *ngFor="let index of skilllist">
+             <td>{{index.skill}}</td>
+           </tr>
+           </tbody>
+         </table>
+       </div>-->
+

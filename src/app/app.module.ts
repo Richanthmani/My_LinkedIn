@@ -12,6 +12,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import {FormsModule, NgForm, NgModel, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { SkillListComponent } from './skills/skill-list/skill-list.component';
+import { ExperienceComponent } from './experience/experience.component';
+import { SkillupdateComponent } from './skills/skillupdate/skillupdate.component';
+import { ProfileupdateComponent } from './profile/profileupdate/profileupdate.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,19 @@ import {HttpClientModule} from "@angular/common/http";
     EducationComponent,
     SkillsComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    SkillListComponent,
+    ExperienceComponent,
+    SkillupdateComponent,
+    ProfileupdateComponent
   ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

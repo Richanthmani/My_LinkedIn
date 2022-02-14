@@ -12,12 +12,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  user= new User();
+  user= new User(0,"","","","");
   msg='';
   constructor(private _service:RegistrationService,private _router :Router) { }
 
   ngOnInit(): void {
+
   }
+
+
+
   registeruser(){
     this._service.registerUserFormRemote(this.user).subscribe(
       data => {
@@ -30,6 +34,11 @@ export class RegistrationComponent implements OnInit {
         this.msg = "EmailId is already taken";
       }
     )
+
+  }
+  gotologin(){
+    console.log("hi hello");
+    this._router.navigate(['/login'])
 
   }
 

@@ -1,59 +1,89 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Add Education
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Skill</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+            <form (ngSubmit)="addeducation()" class="form">
+              <div class="wrapper rounded bg-white">
+                <div class="h3">Registration Form</div>
+                <div class="form">
+                  <div class="row">
+                     <label for="degree">Degree</label> <input type="text" id="degree" class="form-control" name="degree" [(ngModel)]="education.degree" required #degree="ngModel">
+                    <label>Institution</label> <input type="text" class="form-control" name="institution" [(ngModel)]="education.institution" required #institution="ngModel">
+                  </div>
+                  <div class="row">
+                    <label>Major</label> <input type="text" class="form-control"name="major" [(ngModel)]="education.major"required #major="ngModel">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3"> <label>StartDate</label> <input type="date" class="form-control" name="startDate" [(ngModel)]="education.startDate"required #startDate="ngModel"> </div>
+                    <div class="col-md-6 mt-md-0 mt-3"> <label>EndDate</label> <input type="date" class="form-control"name="endDate" [(ngModel)]="education.endDate" required #endDate="ngModel"> </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3"> <label>Score</label> <input type="number" class="form-control"name="score" [(ngModel)]="education.score" required #score="ngModel"> </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3"> <label>Location</label> <input type="text" class="form-control" name="location" [(ngModel)]="education.location" required #location="ngModel"> </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+
+        <div class="modal-footer">
+
+          <button type="submit" class="btn btn-primary" >Add</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right">Close</button>
+
+
+        </div>
+            </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+<h3  style="text-align: center">Education</h3><hr style="width: 70%;
+                                                  margin-left: auto;
+                                                  margin-right: auto;">
+<div *ngFor="let index of EducationDetails">
 <div class="list-group-item clearfix mx-auto">
-  <div class="container">
+  <div class="container" >
 
     <div class="row">
-      <h2>Graduation</h2>
+      <input type="button" value="Delete"  class="btn btn-danger"  (click)="deleteeducation(index.id)" style="float : right"/>
+      <h2>{{index.degree}}</h2>
       <div class="col-md-12 details">
         <blockquote>
-          <h4>Vasavi College of Engineering</h4>
-          <small><cite title="Source Title">Kodad, Telangana  <i class="icon-map-marker"></i></cite></small>
+          <h4>{{index.institution}}</h4>
+          <small><cite title="Source Title">{{index.location}}<i class="icon-map-marker"></i></cite></small>
         </blockquote>
         <p>
-          Cgpa:7.8<br>
-          Information Technology<br>
-          2018-2022
+          {{index.score}}<br>
+          {{index.major}}<br>
+          {{index.startDate}}-{{index.endDate}}
         </p>
       </div>
     </div>
   </div>
 </div>
-
-<div class="list-group-item clearfix mx-auto">
-  <div class="container">
-
-    <div class="row">
-      <h2>Intemediate</h2>
-      <div class="col-md-12 details">
-        <blockquote>
-          <h4>Sri Gayatri Junior College</h4>
-          <small><cite title="Source Title">Hyderabad, Telangana  <i class="icon-map-marker"></i></cite></small>
-        </blockquote>
-        <p>
-          Score:983<br>
-          MPC<br>
-          2016-2018
-        </p>
-      </div>
-    </div>
-  </div>
 </div>
 
 
-<div class="list-group-item clearfix mx-auto">
-  <div class="container">
 
-    <div class="row">
-      <h2>High School</h2>
-      <div class="col-md-12 details">
-        <blockquote>
-          <h4>Ideal High School</h4>
-          <small><cite title="Source Title">Kodad, Telangana  <i class="icon-map-marker"></i></cite></small>
-        </blockquote>
-        <p>
-          cgpa:9.8 <br>
-          2016-2018
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+

@@ -22,14 +22,18 @@
                         </button>
                       </div>
                       <div class="modal-body">
+
+
                         <form
+                          [formGroup]="addSkillForm"
                           (ngSubmit)="addskill()">
                           <div class="form-group">
                             <label for="skill">Add Skill</label>
-                            <input type="text" class="form-control" id="skill"  name="skill"  placeholder="Enter Skill" [(ngModel)]=skill.skill #skills="ngModel" required>
+                            <input type="text" class="form-control" id="skill"  name="skill"  placeholder="Enter Skill" formControlName="skill" required>
+
                             <!--<span  class ="text-danger" *ngIf="email.invalid && email.touched">*Username is a Required field</span><br>--->
                           </div>
-                         <!-- <button type="submit" class="btn btn-primary" (click)="getskills()">Add</button>-->
+                          <!-- <button type="submit" class="btn btn-primary" (click)="getskills()">Add</button>-->
 
 
                           <button type="submit" class="btn btn-primary">Add</button>

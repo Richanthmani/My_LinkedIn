@@ -4,6 +4,7 @@ import { Education} from "../education";
 import {SkillsService} from "../skills.service";
 import {Router} from "@angular/router";
 import {EducationService} from "../education.service";
+import {FormControl, FormControlName, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-education',
@@ -13,11 +14,21 @@ import {EducationService} from "../education.service";
 export class EducationComponent implements OnInit {
 
   education =new Education(0 , 0 ,  "","","","", new Date(),new Date());
+  addEducationForm:FormGroup=new FormGroup({})
   EducationDetails : Education[]=[];
   constructor(public nav:NavbarService,private service:EducationService,private _router :Router) { }
  msg=" "
   ngOnInit(): void {
     this.nav.show();
+    this.addEducationForm=new FormGroup({
+      'degree':new FormControl(),
+      'institution':new FormControl(),
+      'major':new FormControl(),
+      'startDate':new FormControl(),
+      'endDate':new FormControl(),
+      'score':new FormControl(),
+      'location':new FormControl()
+    })
 
 
     this.service.getEducationByUserId().subscribe(
@@ -33,13 +44,17 @@ export class EducationComponent implements OnInit {
   }
 
 
+  get addeducationform(){
+    return this.addEducationForm.controls
+  }
   addeducation() {
 
 
+    this.education=this.addEducationForm.value
     this.service.addEducationToUser(this.education).subscribe(
       data => {
         console.log("response recived");
-       // this._router.navigate(['/education'])
+
 
         this.service.getEducationByUserId().subscribe(
           data=>{

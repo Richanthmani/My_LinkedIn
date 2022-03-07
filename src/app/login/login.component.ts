@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {RegistrationService} from "../registration.service";
 import {User} from "../user";
 import {Router} from "@angular/router";
@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   user=new User(0,"","","","")
   msg='';
+  loginForm:FormGroup=new FormGroup({})
   submitted=false;
 
   constructor( private service:RegistrationService, private router :Router) {
@@ -20,9 +21,19 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.loginForm=new FormGroup({
+      'emailId':new FormControl("",Validators.required),
+      'password':new FormControl("",Validators.required)
+    })
+
+  }
+
+  get loginform(){
+    return this.loginForm.controls
   }
   loginuser(){
    // this.service.user=new User(0,"","","","");
+    this.user=this.loginForm.value;
     this.service.loginUserFormRemote(this.user).subscribe(
       data => {
         console.log("response Recived")
@@ -37,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.msg = "Bad credentials,Please enter valid emailid and password";
       }
     )
-     //this._service.loginUserFormRemote(this.user)
+
   }
   gotoregistration(){
     console.log("hi hello");

@@ -5,6 +5,7 @@ import {NavbarService} from "../navbar.service";
 import {EducationService} from "../education.service";
 import {Router} from "@angular/router";
 import {ExperienceService} from "../experience.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-experience',
@@ -14,12 +15,20 @@ import {ExperienceService} from "../experience.service";
 export class ExperienceComponent implements OnInit {
 
   experience = new Experience(0, "", "", "", new Date(), new Date());
+  addExperienceForm: FormGroup = new FormGroup({});
   ExperienceDetails : Experience[]=[];
 
   constructor(public nav: NavbarService, private service: ExperienceService, private _router: Router) {
   }
 
   ngOnInit(): void {
+    this.addExperienceForm =new FormGroup({
+      'company':new FormControl(),
+      'role':new FormControl(),
+      'startDate':new FormControl(),
+      'endDate':new FormControl(),
+      'location':new FormControl()
+    });
     this.nav.show();
 
 
@@ -36,14 +45,17 @@ export class ExperienceComponent implements OnInit {
   }
 
   addexperience() {
+    this.experience=this.addExperienceForm.value;
+
 
     this.service.addExperienceToUser(this.experience).subscribe(
       data => {
         console.log("response recived");
-        // this._router.navigate(['/education'])
+
         this.service.getExperienceByUserId().subscribe(
           data=>{
             this.ExperienceDetails=data;
+
             console.log("Response recived");
 
           },
@@ -59,6 +71,9 @@ export class ExperienceComponent implements OnInit {
         //this.msg = "degree is already added is already taken";
       }
     )
+  }
+  get addexperienceform(){
+    return this.addExperienceForm.controls
   }
 
   deletexperience(id:number){

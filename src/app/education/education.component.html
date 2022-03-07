@@ -7,49 +7,60 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add Skill</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Education</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-            <form (ngSubmit)="addeducation()" class="form">
-              <div class="wrapper rounded bg-white">
-                <div class="h3">Registration Form</div>
-                <div class="form">
-                  <div class="row">
-                     <label for="degree">Degree</label> <input type="text" id="degree" class="form-control" name="degree" [(ngModel)]="education.degree" required #degree="ngModel">
-                    <label>Institution</label> <input type="text" class="form-control" name="institution" [(ngModel)]="education.institution" required #institution="ngModel">
-                  </div>
-                  <div class="row">
-                    <label>Major</label> <input type="text" class="form-control"name="major" [(ngModel)]="education.major"required #major="ngModel">
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3"> <label>StartDate</label> <input type="date" class="form-control" name="startDate" [(ngModel)]="education.startDate"required #startDate="ngModel"> </div>
-                    <div class="col-md-6 mt-md-0 mt-3"> <label>EndDate</label> <input type="date" class="form-control"name="endDate" [(ngModel)]="education.endDate" required #endDate="ngModel"> </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3"> <label>Score</label> <input type="number" class="form-control"name="score" [(ngModel)]="education.score" required #score="ngModel"> </div>
-
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3"> <label>Location</label> <input type="text" class="form-control" name="location" [(ngModel)]="education.location" required #location="ngModel"> </div>
-
-                  </div>
 
 
+        <form
+          [formGroup]="addEducationForm"
+          (ngSubmit)="addeducation()" class="form">
+          <div class="wrapper rounded bg-white">
+            <div class="h3">Registration Form</div>
+            <div class="form">
+              <div class="row">
+                <label for="degree">Degree</label> <input type="text" id="degree" class="form-control" name="degree" formControlName="degree" required>
+                <span  class ="text-danger" *ngIf="addeducationform['degree'].errors?.['required'] && addeducationform['degree'].touched">*Degree is a required field</span>
+                <label>Institution</label> <input type="text" class="form-control" name="institution" formControlName="institution" required>
+                <span  class ="text-danger" *ngIf="addeducationform['institution'].errors?.['required'] && addeducationform['institution'].touched">*Institition is a required field</span>
+              </div>
+              <div class="row">
+                <label>Major</label> <input type="text" class="form-control"name="major" formControlName="major" required>
+                <span  class ="text-danger" *ngIf="addeducationform['major'].errors?.['required'] && addeducationform['major'].touched">*Major is a required field</span>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3"> <label>StartDate</label> <input type="date" class="form-control" name="startDate" formControlName="startDate"> </div>
+                <div class="col-md-6 mt-md-0 mt-3"> <label>EndDate</label> <input type="date" class="form-control"name="endDate" formControlName="endDate"> </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3"> <label>Score</label> <input type="number" class="form-control"name="score" formControlName="score" required>
+                  <span  class ="text-danger" *ngIf="addeducationform['score'].errors?.['required'] && addeducationform['score'].touched">*Score is a required field</span>
                 </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3"> <label>Location</label> <input type="text" class="form-control" name="location" formControlName="location"> </div>
+
               </div>
 
-        <div class="modal-footer">
 
-          <button type="submit" class="btn btn-primary" >Add</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right">Close</button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="submit" class="btn btn-primary" >Add</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right">Close</button>
 
 
-        </div>
-            </form>
+          </div>
+
+        </form>
+
         </div>
 
 

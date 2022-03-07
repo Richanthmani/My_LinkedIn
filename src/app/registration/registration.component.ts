@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { first } from 'rxjs/operators';
 import {User} from "../user";
 import {RegistrationService} from "../registration.service";
@@ -13,16 +13,26 @@ import {Router} from "@angular/router";
 })
 export class RegistrationComponent implements OnInit {
   user= new User(0,"","","","");
+  registrationForm: FormGroup = new FormGroup({});
   msg='';
   constructor(private _service:RegistrationService,private _router :Router) { }
 
   ngOnInit(): void {
+    this.registrationForm=new FormGroup({
+      'emailId':new FormControl("",Validators.required),
+      'password':new FormControl("",Validators.required),
+      'userName':new FormControl("",Validators.required),
+      'cpassword':new FormControl("",Validators.required)
+    })
+  }
 
+  get registrationform(){
+    return this.registrationForm.controls
   }
 
 
-
   registeruser(){
+    this.user=this.registrationForm.value;
     this._service.registerUserFormRemote(this.user).subscribe(
       data => {
         console.log("response recived")

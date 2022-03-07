@@ -4,6 +4,7 @@ import {Skills} from "../skills";
 import {RegistrationService} from "../registration.service";
 import {SkillsService} from "../skills.service";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-skills',
@@ -11,7 +12,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit{
+
   skill=new Skills(0,"");
+  addSkillForm: FormGroup = new FormGroup({});
   msg=" "
   skilllist : Skills[]=[];
   id: any;
@@ -21,6 +24,9 @@ export class SkillsComponent implements OnInit{
 
 
   ngOnInit(): void{
+    this.addSkillForm =new FormGroup({
+        'skill':new FormControl()
+    });
     this.nav.show()
 
     this.service.getSkillsByUserId().subscribe(
@@ -34,6 +40,9 @@ export class SkillsComponent implements OnInit{
       }
     )
     }
+  get addskillform(){
+    return this.addSkillForm.controls
+  }
 
 
 
@@ -43,7 +52,7 @@ export class SkillsComponent implements OnInit{
 
   addskill() {
 
-
+    this.skill.skill=this.addSkillForm.value.skill;
     this.service.addSkillToUser(this.skill).subscribe(
       data => {
         console.log("response recived");

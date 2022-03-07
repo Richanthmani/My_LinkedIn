@@ -4,6 +4,7 @@ import {SkillsService} from "../skills.service";
 import {Router} from "@angular/router";
 import {Profile} from "../profile";
 import {ProfileService} from "../profile.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.nav.show();
+
 
     this.service.getProfileByUserId().subscribe(
       data=>{
